@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.log
+*.zip
+downloads/
+logs/
+.claude/
+deploy_package/
+desktop.ini
+ecount-collector/__pycache__/
+ecount-collector/downloads/
+ecount-collector/logs/
+ecount-collector/debug/

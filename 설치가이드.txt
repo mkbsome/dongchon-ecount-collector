@@ -1,0 +1,81 @@
+================================================================================
+E-count 자동 데이터 수집기 설치 가이드
+================================================================================
+
+■ 개요
+  - E-count ERP에서 판매/구매/생산 데이터를 자동 수집하여 DB에 저장
+  - 매일 오후 12:30에 자동 실행
+  - 마지막 수집일 이후 데이터만 증분 수집
+
+■ 사전 요구사항
+  1. Python 3.10 이상 설치
+  2. Chrome 브라우저 설치
+  3. 필요 패키지 설치:
+     pip install selenium webdriver-manager pandas psycopg2-binary openpyxl
+
+■ 설치 방법
+
+  [1단계] 폴더 복사
+    - 이 폴더 전체를 기업 PC의 원하는 위치에 복사
+    - 예: C:\EcountCollector\
+
+  [2단계] 스케줄러 등록 (관리자 권한 필요)
+    - setup_scheduler.bat 파일을 우클릭 → "관리자 권한으로 실행"
+    - "작업 스케줄러 등록 완료" 메시지 확인
+
+  [3단계] 수동 테스트
+    - run_collector.bat 더블클릭하여 정상 동작 확인
+    - collector_scheduler.log 파일에서 로그 확인
+
+■ 파일 설명
+
+  auto_collector.py       : 메인 수집 프로그램
+  run_collector.bat       : 수집기 실행 배치파일 (테스트용)
+  run_collector_silent.vbs: 백그라운드 실행 스크립트 (스케줄러용)
+  setup_scheduler.bat     : 스케줄러 등록 (관리자 권한 필요)
+  uninstall_scheduler.bat : 스케줄러 제거
+
+  ecount-collector/       : E-count 브라우저 자동화 모듈
+    config.py             : 로그인 정보 설정
+
+■ 설정 변경
+
+  [로그인 정보 변경]
+    ecount-collector/config.py 파일에서:
+    - ECOUNT_COMPANY_CODE = "회사코드"
+    - ECOUNT_USER_ID = "사용자ID"
+    - ECOUNT_PASSWORD = "비밀번호"
+
+  [실행 시간 변경]
+    setup_scheduler.bat 파일에서 /st 12:30 부분 수정 후 재실행
+    예: /st 13:00 (오후 1시)
+
+■ 상태 확인
+
+  CMD에서 실행:
+    cd C:\EcountCollector
+    python auto_collector.py --status
+
+■ 로그 파일
+
+  - collector_scheduler.log : 스케줄러 실행 로그
+  - auto_collector.log : 상세 수집 로그
+
+■ 문제 해결
+
+  [Chrome 브라우저 오류]
+    - Chrome 브라우저 최신 버전으로 업데이트
+
+  [로그인 실패]
+    - ecount-collector/config.py의 로그인 정보 확인
+    - E-count에서 기기 등록 여부 확인
+
+  [권한 오류]
+    - 해당 E-count 계정이 판매/구매/생산 현황 메뉴 접근 권한 필요
+
+■ 제거 방법
+
+  - uninstall_scheduler.bat 실행 (관리자 권한)
+  - 폴더 삭제
+
+================================================================================
