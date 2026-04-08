@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul
 echo ============================================
 echo E-count 자동 수집기 스케줄러 설정
