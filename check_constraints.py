@@ -5,7 +5,7 @@ import psycopg2
 DB_CONFIG = {
     'host': 'triflow-db.cn88cwwm6cgt.ap-northeast-2.rds.amazonaws.com',
     'port': 5432,
-    'database': 'postgres',
+    'database': 'triflow_ai',
     'user': 'triflow_admin',
     'password': 'tri878993+'
 }

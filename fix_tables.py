@@ -5,7 +5,7 @@ import psycopg2
 DB_CONFIG = {
     'host': 'triflow-db.cn88cwwm6cgt.ap-northeast-2.rds.amazonaws.com',
     'port': 5432,
-    'database': 'postgres',
+    'database': 'triflow_ai',
     'user': 'triflow_admin',
     'password': 'tri878993+'
 }
@@ -33,13 +33,13 @@ for table in ['ecount_sales', 'ecount_purchase', 'ecount_production']:
 print("=== spec 컬럼 추가 ===\n")
 
 try:
-    cur.execute("ALTER TABLE ecount_purchase ADD COLUMN IF NOT EXISTS spec VARCHAR(100)")
+    cur.execute("ALTER TABLE core.ecount_purchase ADD COLUMN IF NOT EXISTS spec VARCHAR(100)")
     print("ecount_purchase: spec 컬럼 추가됨")
 except Exception as e:
     print(f"ecount_purchase 오류: {e}")
 
 try:
-    cur.execute("ALTER TABLE ecount_production ADD COLUMN IF NOT EXISTS spec VARCHAR(100)")
+    cur.execute("ALTER TABLE core.ecount_production ADD COLUMN IF NOT EXISTS spec VARCHAR(100)")
     print("ecount_production: spec 컬럼 추가됨")
 except Exception as e:
     print(f"ecount_production 오류: {e}")

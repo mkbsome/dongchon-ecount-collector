@@ -35,7 +35,7 @@ logger = logging.getLogger(__name__)
 DB_CONFIG = {
     'host': 'triflow-db.cn88cwwm6cgt.ap-northeast-2.rds.amazonaws.com',
     'port': 5432,
-    'database': 'postgres',
+    'database': 'triflow_ai',
     'user': 'triflow_admin',
     'password': 'tri878993+'
 }
@@ -131,7 +131,7 @@ def upload_production_to_db(file_path, conn):
 
     for (date_val, doc_no, product), data in production_agg.items():
         cur.execute('''
-            INSERT INTO ecount_production (date, doc_no, product_name, spec, quantity, from_warehouse, to_warehouse, production_amount, memo)
+            INSERT INTO core.ecount_production (date, doc_no, product_name, spec, quantity, from_warehouse, to_warehouse, production_amount, memo)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON CONFLICT (date, doc_no, product_name) DO UPDATE SET
                 quantity = EXCLUDED.quantity,
